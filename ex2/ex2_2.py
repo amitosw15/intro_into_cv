@@ -50,8 +50,6 @@ def find_words(dilated_im, im, min_area = 10):
 
     for label in range(1, num_labels):  # Skip background label 0
         mask = (labels_im == label).astype(np.uint8) * 255
-        # area = cv2.countNonZero(mask)
-        # if area >= min_area:
         res = plot_rec(mask, res)
 
     return res
@@ -94,10 +92,6 @@ plt.show()
 
 kernel = np.ones((1, 4), np.uint8) / 4
 dilated_im = cv2.dilate(im_th, kernel)
-# plt.figure(figsize=(20, 20),)
-# plt.imshow(dilated_im, cmap='grey')
-# plt.title("dilated Image")
-# plt.show()
 # %%
 
 
@@ -109,13 +103,11 @@ plt.show()
 
 # %%
 # TODO: now we want to mark only the big title words, and do this ONLY using morphological operators)
-kernel = np.ones((4, 4), np.uint8)  # Wider kernel for dilation
+kernel = np.ones((4, 4), np.uint8)  
 eroded_im = cv2.erode(im_th,kernel)
 kernel = np.ones((5, 15), np.uint8)  # Wider kernel for dilation
 binary_only_title_cc_img = cv2.dilate(eroded_im, kernel)
 
-# plt.imshow(binary_only_title_cc_img, cmap='gray')
-# plt.title("Dilated Image for Title Words")
 
 
 plt.figure(figsize=(20, 20))
